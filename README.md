@@ -1,7 +1,8 @@
 # Monroe Molecular Embeddings
 
-Turns a SMILES string into a 720-dimensional embedding for the data-limited bioactivity modelling Monroe was built for. A graph transformer pretrained on 81 million PM6 molecules and 1,089 PubChem bioassays, it adds auxiliary edges encoding E/Z and R/S configuration so stereoisomers cannot collapse to identical inputs. Only the encoder is served; the authors' in-context TabPFN head, which carries much of their reported accuracy, needs a labelled support set per task. Conformer generation is seeded for reproducibility.
+Turns a SMILES string into a 720-dimensional embedding for the data-limited bioactivity modelling Monroe was built for. A graph transformer pretrained on 81 million PM6 molecules and 1,089 PubChem bioassays, it adds auxiliary edges encoding E/Z and R/S configuration so stereoisomers cannot collapse to identical inputs. Only the encoder is served; the authors in-context TabPFN head, which carries much of their reported accuracy, needs a labelled support set per task. Conformer generation is seeded for reproducibility.
 
+This model was incorporated on 2026-09-10.
 
 
 ## Information
@@ -43,8 +44,11 @@ _10 of 720 columns are shown_
 ### Source and Deployment
 - **Source:** `Local`
 - **Source Type:** `External`
+- **S3 Storage**: [https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos8gop.zip](https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos8gop.zip)
 
 ### Resource Consumption
+- **Model Size (Mb):** `287`
+- **Environment Size (Mb):** `1822`
 
 
 ### References
