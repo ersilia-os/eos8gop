@@ -49,6 +49,9 @@ sys.modules.setdefault("wandb", types.ModuleType("wandb"))
 EMB_DIM = 720
 CONFORMER_SEED = 42
 
+# model/checkpoints/ is gitignored: the 287 MB weights.pt is hosted on eosvc
+# (s3://eosvc-models-public/eos8gop/) and restored into this directory at pack
+# time, not committed to the repository. Path stays relative to this file.
 CHECKPOINT_DIR = Path(
     os.environ.get(
         "MONROE_CHECKPOINT_DIR",
