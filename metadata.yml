@@ -2,13 +2,13 @@ Identifier: eos8gop
 Slug: monroe-embeddings
 Status: In progress
 Title: Monroe Molecular Embeddings
-Description: Turns a SMILES string into a 720-dimensional embedding for the
-  data-limited bioactivity modelling Monroe was built for. A graph transformer
-  pretrained on 81 million PM6 molecules and 1,089 PubChem bioassays, it adds
-  auxiliary edges encoding E/Z and R/S configuration so stereoisomers cannot
-  collapse to identical inputs. Only the encoder is served; the authors'
+Description: Turns a SMILES string into a 720-dimensional embedding for the 
+  data-limited bioactivity modelling Monroe was built for. A graph transformer 
+  pretrained on 81 million PM6 molecules and 1,089 PubChem bioassays, it adds 
+  auxiliary edges encoding E/Z and R/S configuration so stereoisomers cannot 
+  collapse to identical inputs. Only the encoder is served; the authors 
   in-context TabPFN head, which carries much of their reported accuracy, needs a
-  labelled support set per task. Conformer generation is seeded for
+  labelled support set per task. Conformer generation is seeded for 
   reproducibility.
 Deployment:
   - Local
@@ -23,7 +23,7 @@ Output:
   - Value
 Output Dimension: 720
 Output Consistency: Fixed
-Interpretation: 720 features encoding molecular structure and stereochemistry
+Interpretation: 720 features encoding molecular structure and stereochemistry 
   from a graph transformer pretrained on quantum-chemical and bioassay data
 Tag:
   - Descriptor
@@ -39,3 +39,4 @@ Publication: https://doi.org/10.48550/arXiv.2608.18982
 Source Code: https://github.com/blazejba/Monroe
 License: MIT
 Contributor: TiagoJanela
+Incorporation Date: '2026-09-10'
