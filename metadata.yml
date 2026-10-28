@@ -40,7 +40,7 @@ Source Code: https://github.com/blazejba/Monroe
 License: MIT
 Contributor: TiagoJanela
 Incorporation Date: '2026-09-10'
-Last Packaging Date: '2026-09-11'
+Last Packaging Date: '2026-10-28'
 Release: v1.0.0
 S3: https://ersilia-models-zipped.s3.eu-central-1.amazonaws.com/eos8gop.zip
 DockerHub: https://hub.docker.com/r/ersiliaos/eos8gop
@@ -49,9 +49,9 @@ Docker Architecture:
   - ARM64
 Model Size: 287.0
 Environment Size: 1836.0
-Image Size: 2270.06
-Computational Performance 1: 34.71
-Computational Performance 2: 26.03
-Computational Performance 3: 49.02
-Computational Performance 4: 336.61
-Computational Performance 5: 1562.12
+Image Size: 2288.86
+Computational Performance 1: 34.22
+Computational Performance 2: 25.48
+Computational Performance 3: 48.28
+Computational Performance 4: 334.91
+Computational Performance 5: 1631.62
