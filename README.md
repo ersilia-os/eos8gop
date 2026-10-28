@@ -2,7 +2,7 @@
 
 Turns a SMILES string into a 720-dimensional embedding for the data-limited bioactivity modelling Monroe was built for. A graph transformer pretrained on 81 million PM6 molecules and 1,089 PubChem bioassays, it adds auxiliary edges encoding E/Z and R/S configuration so stereoisomers cannot collapse to identical inputs. Only the encoder is served; the authors in-context TabPFN head, which carries much of their reported accuracy, needs a labelled support set per task. Conformer generation is seeded for reproducibility.
 
-This model was incorporated on 2026-09-10.Last packaged on 2026-09-11.
+This model was incorporated on 2026-09-10.Last packaged on 2026-10-28.
 
 ## Information
 ### Identifiers
@@ -50,12 +50,12 @@ _10 of 720 columns are shown_
 ### Resource Consumption
 - **Model Size (Mb):** `287`
 - **Environment Size (Mb):** `1836`
-- **Image Size (Mb):** `2270.06`
+- **Image Size (Mb):** `2288.86`
 
 **Computational Performance (seconds):**
-- 10 inputs: `34.71`
-- 100 inputs: `49.02`
-- 10000 inputs: `1562.12`
+- 10 inputs: `34.22`
+- 100 inputs: `48.28`
+- 10000 inputs: `1631.62`
 
 ### References
 - **Source Code**: [https://github.com/blazejba/Monroe](https://github.com/blazejba/Monroe)
