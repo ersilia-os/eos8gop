@@ -419,6 +419,7 @@ def build_single_graph(
     stereo_augmentation: Optional[bool] = True,
     allow_2d_fallback_on_timeout: bool = False,
     symmetrize: bool = False,
+    smiles: Optional[str] = None,
 ) -> Dict[str, np.ndarray]:
 
     # inference time: build from InChi
@@ -426,9 +427,18 @@ def build_single_graph(
         coords is None and 
         charge is None):
         mol = Chem.MolFromInchi(inchi, sanitize=False)
+        # Ersilia patch, not in upstream (see the monroe_predict.py docstring, item 4).
+        if mol is not None:
+            try:
+                Chem.SanitizeMol(mol)
+            except Exception:
+                # InChI does not keep charge separation (N-oxides, zwitterions, aromatic N+), so the
+                # rebuilt molecule can have invalid valences: fall back to the input SMILES.
+                mol = None
+        if mol is None and smiles is not None:
+            mol = Chem.MolFromSmiles(smiles)
         if mol is None:
             raise ValueError(f"Skipping - failed to rebuild molecule from InChI for {inchi}")
-        Chem.SanitizeMol(mol)
         mol = Chem.AddHs(mol, addCoords=False)
         Chem.AssignStereochemistry(mol, cleanIt=True, force=True)
         pos = None

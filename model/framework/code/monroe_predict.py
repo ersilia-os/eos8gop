@@ -8,8 +8,9 @@ Only the encoder is served. The authors pair it with an in-context TabPFN head,
 which needs a labelled support set per task and so has no place behind a
 single-compound interface.
 
-Three upstream problems are worked around here, in the wrapper only — the
-vendored model source and weights are left untouched:
+Three upstream problems are worked around here, in the wrapper only, and one
+more is fixed by a small patch to the vendored featurizer (item 4); the weights
+and the rest of the vendored source are left untouched:
 
 1. The released checkpoint is pickled from CUDA tensors and the public
    ``load_ckpt`` takes no device argument, so upstream's ``run_inference.py``
@@ -23,6 +24,20 @@ vendored model source and weights are left untouched:
 3. ``monroe.model.ckpt`` imports ``wandb`` at module level for a training-only
    code path, which would drag the package and its dependencies into the image.
    A stub is registered below instead.
+
+4. ``build_single_graph`` rebuilds each molecule from its InChI, which does not
+   keep charge separation. N-oxides, zwitterions and aromatic N+ cations come
+   back with invalid valences and ``SanitizeMol`` raises, so the upstream
+   pipeline skips them and this wrapper used to return a row of NaN for them
+   (88 of the 1,355,109 molecules of the Hub's first full run, as counted in
+   issue #2). ``featurizer.py`` now
+   falls back to the input SMILES, which still carries the charges, only when
+   the InChI route fails. Molecules that work through InChI are bit-identical
+   to before. Embeddings built by the fallback come from a different graph
+   route than the one the authors validated (on ordinary molecules the two
+   routes differ by a median of about 3% in relative L2 norm), so treat them as
+   less validated. Patch against upstream commit 57238edf: ``build_single_graph``
+   gains a ``smiles`` argument and the InChI sanitise step falls back to it.
 
 With these applied, the authors' released per-target MoleculeACE results
 reproduce to a mean absolute deviation of 0.005 RMSE, against their own
@@ -142,7 +157,7 @@ def embed_one(smiles):
         inchi = dm.to_inchi(smiles)
         if inchi is None:
             return None
-        graph = build_single_graph(inchi=inchi, symmetrize=True)
+        graph = build_single_graph(inchi=inchi, symmetrize=True, smiles=smiles)
     except Exception:
         return None
 
